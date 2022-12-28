@@ -1,0 +1,18 @@
+.text h1{
+    text-align: center;
+    margin-top: 10%;
+    font-size: 50px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+tr{
+    border-radius: 5px solid black;
+  }
+  td{
+    border-radius: 5px solid black;
+  }
+  .tabledesign tr td{
+    text-shadow: #180f14;
+    color: aqua;
+    text-shadow: 5px;
+    background-color: darkgray;
+  }
