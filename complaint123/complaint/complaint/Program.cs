@@ -1,0 +1,38 @@
+using complaint.Models;
+using Microsoft.AspNetCore.Cors.Infrastructure;
+
+var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+
+builder.Services.AddControllers();
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("MycorsPolicy", builder => builder
+    .WithOrigins("http://localhost:3000", "http://localhost:3001")
+    .AllowAnyMethod()
+    .AllowCredentials()
+    .WithHeaders("Accept", "Content-Type", "Origin", "X-My-Header"));
+});
+
+builder.Services.AddTransient<ComplaintService>();
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+app.UseHttpsRedirection();
+
+app.UseAuthorization();
+app.UseCors("MycorsPolicy");
+app.MapControllers();
+
+app.Run();
